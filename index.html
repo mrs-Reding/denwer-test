@@ -1,0 +1,30 @@
+<html>
+<head>
+</head>
+<body>
+JSON test. Open Developer Tools and check console..
+<script>
+    function getJSONData(path, callback) {
+        var httpRequest = new XMLHttpRequest();
+		
+        httpRequest.onreadystatechange = function() {
+			if (httpRequest.readyState === 4) {
+				if (httpRequest.status === 200) {
+					var data = JSON.parse(httpRequest.responseText);
+					if (callback) callback(data);
+				}
+			}
+		};
+		
+		httpRequest.open('GET', path);
+		httpRequest.send(); 
+	}
+
+
+	getJSONData('http://localhost/jstrainee/json.php', function(data){
+		console.log(data);
+		console.log(data.a);
+	});
+</script>
+</body>
+</html>
